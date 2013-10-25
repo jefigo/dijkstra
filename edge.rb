@@ -14,14 +14,23 @@ class Edge
     @weight = weight
   end
 
+
+  def add_edge(first_node, second_node)
+    first_node.edges << self
+    second_node.edges << self
+  end
+
 end
 
 
 describe Edge do
+
+
+  let(:first_node) { Node.new('1') }
+  let(:second_node) { Node.new('2') }
+  let(:edge) { Edge.new( first_node, second_node, 2 ) }
+
   context 'new edge' do
-    let(:first_node) { Node.new('1') }
-    let(:second_node) { Node.new('2') }
-    let(:edge) { Edge.new( first_node, second_node, 2 ) }
 
     it 'has two nodes' do
       expect(edge.first_node).to be_an_instance_of Node
@@ -31,5 +40,18 @@ describe Edge do
     it 'has a weight' do
       expect(edge.weight).to eql 2
     end
+  end
+
+  describe '#add_edge' do
+
+    before do
+      edge.add_edge(first_node, second_node)
+    end
+
+    it 'add on edge' do
+      expect(first_node.edges[0]).to eql edge
+      expect(second_node.edges[0]).to eql edge
+    end
+
   end
 end
