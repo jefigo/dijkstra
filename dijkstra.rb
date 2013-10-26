@@ -4,7 +4,7 @@ require 'pry'
 
 class Dijkstra
 
-	attr_accessor  :current_node, :visited_nodes, :current_node
+	attr_accessor  :current_node, :visited_nodes
 
 	def find_the_shortest_path(start_node, target_node)
 		@visited_nodes = []
