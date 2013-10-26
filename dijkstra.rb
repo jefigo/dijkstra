@@ -46,10 +46,6 @@ class Dijkstra
     end
   end
 
-  def is_the_end_node?(node)
-    node == @end_node ? true : false
-  end
-
 end
 
 
