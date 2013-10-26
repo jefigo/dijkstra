@@ -51,9 +51,7 @@ nodo3 = Node.new('3')
 nodo4 = Node.new('4')
 nodo5 = Node.new('5')
 nodo6 = Node.new('6')
-dijkstra = Dijkstra.new
 g = Graph.new
-g.add_nodes( [nodo1, nodo2, nodo3, nodo4, nodo5, nodo6] )
 g.add_edge( {first_node: nodo1, second_node: nodo2, weight: 7} )
 g.add_edge( {first_node: nodo1, second_node: nodo3, weight: 9} )
 g.add_edge( {first_node: nodo1, second_node: nodo6, weight: 14} )
@@ -63,5 +61,6 @@ g.add_edge( {first_node: nodo3, second_node: nodo6, weight: 2} )
 g.add_edge( {first_node: nodo3, second_node: nodo4, weight: 11} )
 g.add_edge( {first_node: nodo4, second_node: nodo5, weight: 6} )
 g.add_edge( {first_node: nodo6, second_node: nodo5, weight: 9} )
+dijkstra = Dijkstra.new
 dijkstra.find_the_shortest_path(nodo1, nodo5)
 puts dijkstra.visited_nodes
