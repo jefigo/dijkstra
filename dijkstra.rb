@@ -16,7 +16,7 @@ class Dijkstra
 	end
 
 
-	def low_distance_node(node)
+	def short_distance_node(node)
 		current_distance = @current_node.distance
 		node.edges.each do |edge|
 			target_node = get_target_node(edge, node)
