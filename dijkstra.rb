@@ -6,7 +6,7 @@ class Dijkstra
 
 	attr_accessor  :current_node, :visited_nodes, :current_node
 
-	def find_the_shorter_path(start_node, target_node)
+	def find_the_shortest_path(start_node, target_node)
 		@visited_nodes = []
 		@current_node = start_node
 		@current_node.unvisited = false
@@ -17,20 +17,17 @@ class Dijkstra
 	end
 
 
-	def short_distance_node(node)
+	def shortest_distance_node(node)
 		current_distance = -1
 		node.edges.each do |edge|
 			target_node = get_target_node(edge, node)
       target_node.distance = node.distance +  edge.weight
       if target_node.unvisited
         if current_distance == -1
-          target_node.distance = node.distance + edge.weight
-          current_distance = target_node.distance
           @current_node = target_node
+          current_distance = target_node.distance
         else
-          if current_distance > target_node.distance
-            target_node.distance = node.distance + edge.weight
-            current_distance = target_node.distance
+          if @current_node.distance > target_node.distance
             @current_node = target_node
           end
         end
@@ -67,6 +64,6 @@ nuevo.build_edge(nodo3, nodo6, 2)
 nuevo.build_edge(nodo3, nodo4, 11)
 nuevo.build_edge(nodo4, nodo5, 6)
 nuevo.build_edge(nodo6, nodo5, 9)
-nuevo.find_the_shorter_path(nodo5, nodo1)
+nuevo.find_the_shorter_path(nodo1, nodo5)
 puts nuevo.visited_nodes
-puts nuevo.current_node.name
+puts nuevo.current_node.distance
