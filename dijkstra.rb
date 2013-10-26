@@ -9,8 +9,8 @@ class Dijkstra
   def find_the_shorter_path(start_node, target_node)
     @visited_nodes = []
     @current_node = start_node
-    @current_node.visited = true
-    while (!target_node.visited) do
+    @current_node.unvisited = false
+    while (target_node.unvisited) do
       low_distance_node(@current_node)
       binding.pry
     end
@@ -22,7 +22,7 @@ class Dijkstra
     node.edges.each do |edge|
       origin, destination = get_the_origin_and_destination_nodes(edge, node)
       node.distance = @current_node.distance + edge.weight
-      unless destination.visited
+      if destination.unvisited
         if (current_distance == -1 ) or (current_distance < node.distance )
           current_distance = node.distance + edge.weight
           @current_node = destination
@@ -30,7 +30,7 @@ class Dijkstra
       end
     end
     @visited_nodes << @current_node
-    @current_node.visited = true
+    @current_node.unvisited = false
     @current_node.distance
   end
 

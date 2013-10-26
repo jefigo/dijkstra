@@ -9,7 +9,7 @@ class Node
     @name = name
     @distance = -1
     @edges = [] 
-    @visited = false
+    @unvisited = true
   end
 
 end
