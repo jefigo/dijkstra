@@ -13,7 +13,6 @@ class Edge
     add_edge
   end
 
-
   def add_edge
     @first_node.edges << self
     @second_node.edges << self
