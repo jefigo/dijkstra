@@ -7,7 +7,7 @@ class Node
   
   def initialize(name)
     @name = name
-    @distance = 0
+    @distance = -1
     @edges = [] 
     @visited = false
   end

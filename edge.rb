@@ -1,6 +1,5 @@
 require 'rspec'
 require 'pry'
-
 require_relative 'node.rb'
 
 class Edge
@@ -12,12 +11,13 @@ class Edge
     @first_node = first_node
     @second_node = second_node
     @weight = weight
+    add_edge
   end
 
 
-  def add_edge(first_node, second_node)
-    first_node.edges << self
-    second_node.edges << self
+  def add_edge
+    @first_node.edges << self
+    @second_node.edges << self
   end
 
 end
@@ -45,7 +45,7 @@ describe Edge do
   describe '#add_edge' do
 
     before do
-      edge.add_edge(first_node, second_node)
+      edge.add_edge
     end
 
     it 'add on edge' do

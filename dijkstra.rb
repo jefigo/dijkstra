@@ -4,37 +4,34 @@ require 'pry'
 
 class Dijkstra
 
-  attr_accessor  :current_node, :total_distance, :start_node, :end_node, :visited_nodes
+  attr_accessor  :current_node, :visited_nodes
 
-  def initialize(start_node, end_node)
+  def find_the_shorter_path(start_node, target_node)
     @visited_nodes = []
-    @start_node = start_node
-    @end_node = end_node
     @current_node = start_node
     @current_node.visited = true
+    while (!target_node.visited) do
+      low_distance_node(@current_node)
+      binding.pry
+    end
   end
 
-  def find
-    @total_distance = 0
-    distance = get_the_lower_edge_distance(@current_node)
-    @total_distance = @total_distance + distance
-  end
 
-
-  def get_the_lower_edge_distance(node)
-    current_distance = 0
+  def low_distance_node(node)
+    current_distance = @current_node.distance
     node.edges.each do |edge|
       origin, destination = get_the_origin_and_destination_nodes(edge, node)
+      node.distance = @current_node.distance + edge.weight
       unless destination.visited
-        if (current_distance < edge.weight)
-          current_distance = edge.weight
+        if (current_distance == -1 ) or (current_distance < node.distance )
+          current_distance = node.distance + edge.weight
           @current_node = destination
         end
       end
     end
     @visited_nodes << @current_node
     @current_node.visited = true
-    current_distance
+    @current_node.distance
   end
 
   def build_edge(first_node, second_node, weight)
@@ -62,18 +59,17 @@ nodo3 = Node.new('3')
 nodo4 = Node.new('4')
 nodo5 = Node.new('5')
 nodo6 = Node.new('6')
-nuevo = Dijkstra.new(nodo1, nodo5)
+nuevo = Dijkstra.new
 nuevo.build_edge(nodo1, nodo2, 7)
 nuevo.build_edge(nodo1, nodo3, 9)
 nuevo.build_edge(nodo1, nodo6, 14)
+
 nuevo.build_edge(nodo2, nodo3, 10)
 nuevo.build_edge(nodo2, nodo4, 15)
 nuevo.build_edge(nodo3, nodo6, 2)
 nuevo.build_edge(nodo3, nodo4, 11)
 nuevo.build_edge(nodo4, nodo5, 6)
-while (!nuevo.end_node.visited)
-  nuevo.find()
-  binding.pry
-end
+nuevo.build_edge(nodo6, nodo5, 9)
+nuevo.find_the_shorter_path(nodo1, nodo5)
 puts nuevo.visited_nodes
 
