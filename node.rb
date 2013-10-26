@@ -3,7 +3,8 @@ require 'pry'
 
 class Node
 
-   attr_accessor :distance, :name, :unvisited, :edges
+   attr_accessor :distance, :edges, :unvisited
+   attr_reader   :name
   
   def initialize(name)
     @name = name

@@ -10,27 +10,34 @@ class Dijkstra
 		@visited_nodes = []
 		@current_node = start_node
 		@current_node.unvisited = false
+    @current_node.distance = 0
 		while (target_node.unvisited) do
-			low_distance_node(@current_node)
+			short_distance_node(@current_node)
 		end
 	end
 
 
 	def short_distance_node(node)
-		current_distance = @current_node.distance
+		current_distance = -1
 		node.edges.each do |edge|
 			target_node = get_target_node(edge, node)
-			node.distance = @current_node.distance + edge.weight
-			if target_node.unvisited
-				if (current_distance == -1 ) or (current_distance < node.distance )
-					current_distance = node.distance + edge.weight
-					@current_node = target_node
-				end
-			end
-		end
+      target_node.distance = node.distance +  edge.weight
+      if target_node.unvisited
+        if current_distance == -1
+          target_node.distance = node.distance + edge.weight
+          current_distance = target_node.distance
+          @current_node = target_node
+        else
+          if current_distance > target_node.distance
+            target_node.distance = node.distance + edge.weight
+            current_distance = target_node.distance
+            @current_node = target_node
+          end
+        end
+      end
+    end
 		@visited_nodes << @current_node.name
 		@current_node.unvisited = false
-		@current_node.distance
 	end
 
 	def build_edge(first_node, second_node, weight)

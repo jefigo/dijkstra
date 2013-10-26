@@ -4,8 +4,7 @@ require_relative 'node.rb'
 
 class Edge
 
-  attr_accessor :first_node, :second_node
-  attr_reader :weight
+  attr_reader  :first_node, :second_node, :weight
 
   def initialize(first_node, second_node, weight)
     @first_node = first_node
