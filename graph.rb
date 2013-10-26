@@ -1,5 +1,8 @@
 require 'pry'
 
+require_relative 'node.rb'
+require_relative 'edge.rb'
+
 class Graph
 
   attr_reader :nodes, :edges
