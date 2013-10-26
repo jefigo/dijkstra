@@ -18,8 +18,9 @@ describe Node do
 
   context 'new node' do
 
+    let(:node) { Node.new('1') }
+
     it 'has a initializing values' do
-      node = Node.new('1')
       expect(node.distance).to eql 0
       expect(node.visited).to be_false
       expect(node.name).to eql '1'
