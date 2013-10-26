@@ -12,7 +12,7 @@ class Dijkstra
 		@current_node.unvisited = false
     @current_node.distance = 0
 		while (target_node.unvisited) do
-			short_distance_node(@current_node)
+			shortest_distance_node(@current_node)
 		end
 	end
 
@@ -64,6 +64,6 @@ nuevo.build_edge(nodo3, nodo6, 2)
 nuevo.build_edge(nodo3, nodo4, 11)
 nuevo.build_edge(nodo4, nodo5, 6)
 nuevo.build_edge(nodo6, nodo5, 9)
-nuevo.find_the_shorter_path(nodo1, nodo5)
+nuevo.find_the_shortest_path(nodo1, nodo5)
 puts nuevo.visited_nodes
 puts nuevo.current_node.distance
