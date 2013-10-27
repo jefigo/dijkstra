@@ -6,6 +6,8 @@ class Dijkstra
 
   attr_accessor  :current_node
 
+  @@infinite = -1
+
 	def find_the_shortest_path(start_node, target_node)
 		visited_nodes = []
 		@current_node = start_node
@@ -21,12 +23,12 @@ class Dijkstra
 
 
   def shortest_distance_node(start_node)
-    current_distance = -1
+    current_distance = @@infinite
     start_node.edges.each do |edge|
       target_node = get_target_node(edge, start_node)
       target_node.distance = start_node.distance +  edge.weight
       if target_node.unvisited
-        if current_distance == -1
+        if current_distance_infinite?(current_distance)
           @current_node = target_node
           current_distance = target_node.distance
         else
@@ -37,10 +39,16 @@ class Dijkstra
       end
     end
     @current_node
-	end
+  end
+
+  private
 
 	def get_target_node(edge, node)
 		node == edge.first_node ? edge.second_node : edge.first_node
-	end
+  end
+
+  def current_distance_infinite?(distance)
+    distance == @@infinite
+  end
 
 end
