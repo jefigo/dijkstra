@@ -10,12 +10,6 @@ class Edge
     @first_node = first_node
     @second_node = second_node
     @weight = weight
-    add_edge
-  end
-
-  def add_edge
-    @first_node.edges << self
-    @second_node.edges << self
   end
 
 end

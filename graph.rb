@@ -5,9 +5,6 @@ require_relative 'edge.rb'
 
 class Graph
 
-  attr_reader :nodes, :edges
-
-
   def initialize
     @nodes = []
     @edges = []
@@ -19,8 +16,16 @@ class Graph
     end
   end
 
+  def nodes( name )
+    @nodes.map do | node |
+      return node if node.name == name
+    end
+  end
+
   def add_edge( data = {} )
     @edges << Edge.new(data[:first_node], data[:second_node], data[:weight])
+    data[:first_node].edges << @edges.last
+    data[:second_node].edges << @edges.last
   end
 
 end

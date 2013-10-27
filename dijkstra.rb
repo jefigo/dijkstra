@@ -5,23 +5,26 @@ require 'pry'
 
 class Dijkstra
 
-  attr_accessor  :current_node, :visited_nodes
+  attr_accessor  :current_node
 
 	def find_the_shortest_path(start_node, target_node)
-		@visited_nodes = []
+		visited_nodes = []
 		@current_node = start_node
 		@current_node.unvisited = false
     @current_node.distance = 0
 		while (target_node.unvisited) do
-			shortest_distance_node(@current_node)
+      visited_nodes << @current_node.name
+      shortest_distance_node(@current_node)
+      @current_node.unvisited = false
     end
-	end
+    visited_nodes
+  end
 
 
-	def shortest_distance_node(node)
+  def shortest_distance_node(node)
     current_distance = -1
-		node.edges.each do |edge|
-			target_node = get_target_node(edge, node)
+    node.edges.each do |edge|
+      target_node = get_target_node(edge, node)
       target_node.distance = node.distance +  edge.weight
       if target_node.unvisited
         if current_distance == -1
@@ -34,8 +37,7 @@ class Dijkstra
         end
       end
     end
-    @current_node.unvisited = false
-    @visited_nodes << @current_node.name
+    @current_node
 	end
 
 	def get_target_node(edge, node)
@@ -44,23 +46,16 @@ class Dijkstra
 
 end
 
-
-nodo1 = Node.new('1')
-nodo2 = Node.new('2')
-nodo3 = Node.new('3')
-nodo4 = Node.new('4')
-nodo5 = Node.new('5')
-nodo6 = Node.new('6')
-g = Graph.new
-g.add_edge( {first_node: nodo1, second_node: nodo2, weight: 7} )
-g.add_edge( {first_node: nodo1, second_node: nodo3, weight: 9} )
-g.add_edge( {first_node: nodo1, second_node: nodo6, weight: 14} )
-g.add_edge( {first_node: nodo2, second_node: nodo3, weight: 10} )
-g.add_edge( {first_node: nodo2, second_node: nodo4, weight: 15} )
-g.add_edge( {first_node: nodo3, second_node: nodo6, weight: 2} )
-g.add_edge( {first_node: nodo3, second_node: nodo4, weight: 11} )
-g.add_edge( {first_node: nodo4, second_node: nodo5, weight: 6} )
-g.add_edge( {first_node: nodo6, second_node: nodo5, weight: 9} )
+graph = Graph.new
+graph.add_nodes %w(1 2 3 4 5 6)
+graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('2'), weight: 7} )
+graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('3'), weight: 9} )
+graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('6'), weight: 14} )
+graph.add_edge( {first_node: graph.nodes('2'), second_node: graph.nodes('3'), weight: 10} )
+graph.add_edge( {first_node: graph.nodes('2'), second_node: graph.nodes('4'), weight: 15} )
+graph.add_edge( {first_node: graph.nodes('3'), second_node: graph.nodes('6'), weight: 2} )
+graph.add_edge( {first_node: graph.nodes('3'), second_node: graph.nodes('4'), weight: 11} )
+graph.add_edge( {first_node: graph.nodes('4'), second_node: graph.nodes('5'), weight: 6} )
+graph.add_edge( {first_node: graph.nodes('6'), second_node: graph.nodes('5'), weight: 9} )
 dijkstra = Dijkstra.new
-dijkstra.find_the_shortest_path(nodo1, nodo5)
-puts dijkstra.visited_nodes
+puts dijkstra.find_the_shortest_path(graph.nodes('1'), graph.nodes('5'))
