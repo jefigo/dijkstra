@@ -44,15 +44,4 @@ describe Dijkstra do
     end
   end
 
-  context '#get_target_node' do
-
-    let(:target_node) { graph.node('2') }
-    let(:weight) { 7 }
-    let(:edge) { Edge.new( start_node, target_node, weight ) }
-
-    it 'returns the target node in a given edge' do
-      expect(dijkstra.get_target_node(edge, start_node)).to eql target_node
-    end
-  end
-
 end
