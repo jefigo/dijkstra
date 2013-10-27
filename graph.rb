@@ -22,10 +22,10 @@ class Graph
     end
   end
 
-  def add_edge( data = {} )
-    @edges << Edge.new(data[:first_node], data[:second_node], data[:weight])
-    data[:first_node].edges << @edges.last
-    data[:second_node].edges << @edges.last
+  def add_edge( first_node, second_node, weight )
+    @edges << Edge.new(first_node, second_node, weight)
+    first_node.edges << @edges.last
+    second_node.edges << @edges.last
   end
 
 end

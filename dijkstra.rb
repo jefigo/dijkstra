@@ -48,14 +48,21 @@ end
 
 graph = Graph.new
 graph.add_nodes %w(1 2 3 4 5 6)
-graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('2'), weight: 7} )
-graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('3'), weight: 9} )
-graph.add_edge( {first_node: graph.nodes('1'), second_node: graph.nodes('6'), weight: 14} )
-graph.add_edge( {first_node: graph.nodes('2'), second_node: graph.nodes('3'), weight: 10} )
-graph.add_edge( {first_node: graph.nodes('2'), second_node: graph.nodes('4'), weight: 15} )
-graph.add_edge( {first_node: graph.nodes('3'), second_node: graph.nodes('6'), weight: 2} )
-graph.add_edge( {first_node: graph.nodes('3'), second_node: graph.nodes('4'), weight: 11} )
-graph.add_edge( {first_node: graph.nodes('4'), second_node: graph.nodes('5'), weight: 6} )
-graph.add_edge( {first_node: graph.nodes('6'), second_node: graph.nodes('5'), weight: 9} )
+edges = [
+          [graph.nodes('1'), graph.nodes('2'), 7],
+          [graph.nodes('1'), graph.nodes('3'), 9],
+          [graph.nodes('1'), graph.nodes('6'), 14],
+          [graph.nodes('2'), graph.nodes('3'),  10],
+          [graph.nodes('2'), graph.nodes('4'), 15],
+          [graph.nodes('3'), graph.nodes('6'), 2],
+          [graph.nodes('3'), graph.nodes('4'), 11],
+          [graph.nodes('4'), graph.nodes('5'), 6],
+          [graph.nodes('6'), graph.nodes('5'), 9]
+        ]
+
+edges.each do |first_node, second_node, weight|
+  graph.add_edge( first_node, second_node, weight )
+end
+
 dijkstra = Dijkstra.new
 puts dijkstra.find_the_shortest_path(graph.nodes('1'), graph.nodes('5'))
