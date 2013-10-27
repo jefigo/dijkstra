@@ -1,9 +1,9 @@
-require 'pry'
-
-require_relative 'node.rb'
-require_relative 'edge.rb'
+require './node.rb'
+require './edge.rb'
 
 class Graph
+
+  attr_reader :edges, :nodes
 
   def initialize
     @nodes = []
@@ -16,7 +16,7 @@ class Graph
     end
   end
 
-  def nodes( name )
+  def node( name )
     @nodes.map do | node |
       return node if node.name == name
     end
