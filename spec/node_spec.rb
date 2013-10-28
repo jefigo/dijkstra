@@ -20,7 +20,7 @@ describe Node do
     end
 
     it 'is unvisited' do
-      expect(node.unvisited).to be
+      expect(node.unvisited?).to be
     end
   end
 end

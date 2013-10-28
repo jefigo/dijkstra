@@ -1,7 +1,8 @@
 class Node
 
-   attr_accessor :distance, :edges, :unvisited
+   attr_accessor :distance, :edges
    attr_reader   :name
+   attr_writer   :unvisited
 
    @@infinite = -1
   
@@ -10,6 +11,10 @@ class Node
     @distance = @@infinite
     @edges = [] 
     @unvisited = true
+  end
+
+  def unvisited?
+    @unvisited
   end
 
 end
